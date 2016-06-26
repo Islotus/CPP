@@ -13,12 +13,14 @@
 #include <iostream>
 #include <queue>
 #include <deque>
+#include <functional>
 
 using std::cin;
 using std::cout;
 using std::endl;
 using std::priority_queue;
 using std::deque;
+using std::greater;
 
 //priority_queue允许对存储的元素设置优先级。
 //优先级队列的一个实例是机场行李检查队列。30分钟后即将离港的航班的乘客通常会设置高的优先级别。
@@ -28,8 +30,8 @@ int main()
 {
 	int i = 0;
 	int arr[10] = {0, 1, 3, 2, 5, 6, 9, 8, 7, 4};
-	priority_queue<int> obRQ;
-//	priority_queue<int,deque<int>,greater<int> > obRQ;	
+//	priority_queue<int> obRQ;
+	priority_queue<int,deque<int>,greater<int> > obRQ;	
 	for(i = 0; i < 10; ++i)
 	{
 		obRQ.push(arr[i]);  //把元素一个一个存入到priority_queue中，并且在内部进行排序
@@ -63,6 +65,8 @@ int main()
 //第二个参数为容器类型，默认为deque
 //第三个参数为比较函数
 //故示例2中输出结果为：2 3 4 5 6
+//注：
+//greater可以使用模板，头文件<functional>,声明using std::greater
 //
 //3.自定义优先级，重载比较符号
 //重载默认的 < 符号
