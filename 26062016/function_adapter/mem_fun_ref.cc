@@ -30,6 +30,7 @@ using std::endl;
 using std::vector;
 using std::for_each;
 using std::mem_fun_ref;
+using std::mem_fn;
 
  
 class NumVals
@@ -115,6 +116,31 @@ int main()
 	cout << "v2中删除偶数后剩下的值为：" << endl;
 	for_each(v2.begin(), it2, mem_fun_ref(&NumVals::display));
 	cout << endl;
+
+	//3.
+	//测试mem_fn函数
+	//结果：可以，以后可以用mem_fn取代mem_fun_ref和mem_fun了，简便很多
+	//remove_if不是真正的删除元素，只是把元素放到后面去了
+#if 1
+	vector<NumVals> v3(13);
+	vector<NumVals>::iterator it3;
+	for(int k = 0; k < 13; ++k)
+	{
+		v3[k] = NumVals(k+1);
+	}
+	cout << "v3中的原始值为：" << endl;
+	for_each(v3.begin(), v3.end(), mem_fn(&NumVals::display));
+	cout << endl;
+
+	it3 = remove_if(v3.begin(), v3.end(), mem_fn(&NumVals::isEven));
+	cout << "v3中删除偶数后剩下的值为：" << endl;
+	for_each(v3.begin(), it3, mem_fn(&NumVals::display));
+	cout << endl;
+
+	cout << "v3中当前的元素为：" << endl;
+	for_each(v3.begin(), v3.end(), mem_fn(&NumVals::display));
+	cout << endl;
+#endif
 
 	return 0;
 }
